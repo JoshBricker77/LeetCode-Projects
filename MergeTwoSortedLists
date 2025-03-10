@@ -1,0 +1,44 @@
+# To merge two sorted linked lists (l1 and l2) into one sorted linked list:
+#
+# 1. Create a placeholder node called 'dummy' that will serve as the non-data starting point
+#    for the new linked list. This helps manage the new list without worrying about
+#    initializing the head explicitly in the middle of the algorithm.
+#
+# 2. Use a pointer 'current' that will always point to the last node in the new merged list.
+#    Start 'current' at 'dummy' to make appending to the list easier by manipulating 'current.next'.
+#
+# 3. Compare the values of the nodes at the front of l1 and l2.
+#    - Append the smaller value to 'current.next' and move the 'current' pointer to this new node.
+#    - Move the pointer (either l1 or l2) of the list from which a node was taken to the next node.
+#
+# 4. Continue this comparison until one of the lists runs out of nodes.
+#
+# 5. Once one list is exhausted, append the remainder of the non-exhausted list to the merged list.
+#    This is straightforward because the lists are already sorted, so all remaining nodes in the
+#    non-exhausted list are guaranteed to be larger than any currently in the merged list.
+#
+# 6. The starting point of the merged list is 'dummy.next', as 'dummy' was a placeholder without
+#    actual data relevant to the input lists.
+#
+# Following this strategy ensures that the merged list is sorted and all nodes from both input lists
+# are included without using extra space for list nodes beyond the pointers needed to traverse and
+# rearrange links.
+
+# Now, let's put this plan into code.
+
+class Solution:
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(-1)
+        current = dummy
+
+        while l1 and l2:
+            if l1.val < l2.val:
+                current.next = l1
+                l1 = l1.next
+            else:
+                current.next = l2
+                l2 = l2.next
+            current = current.next
+
+        current.next = l1 if l1 else l2
+        return dummy.next
