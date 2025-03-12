@@ -1,0 +1,35 @@
+from typing import List
+
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        """
+        Removes all occurrences of val in nums in-place.
+        The order of elements may change.
+
+        Args:
+        nums (List[int]): A list of integers.
+        val (int): The value to remove.
+
+        Returns:
+        int: The number of elements in nums that are not equal to val.
+        """
+        # Initialize a pointer to track the position of non-val elements
+        i = 0
+
+        # Iterate over the array with a fast pointer (j)
+        for j in range(len(nums)):
+            # If nums[j] is not equal to val, keep it
+            if nums[j] != val:
+                nums[i] = nums[j]  # Move the valid number forward
+                i += 1  # Increment the index for the next valid number
+
+        # Return the count of elements that are not val
+        return i
+
+# Example usage:
+nums = [3, 2, 2, 3]
+val = 3
+sol = Solution()
+k = sol.removeElement(nums, val)
+print(f"Number of elements not equal to {val}: {k}")
+print(f"Modified nums array: {nums[:k]}")  # Expected output: [2, 2]
