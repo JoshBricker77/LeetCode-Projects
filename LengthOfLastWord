@@ -1,0 +1,25 @@
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        """
+        Finds the length of the last word in a string.
+
+        Args:
+        s (str): The input string containing words and spaces.
+
+        Returns:
+        int: The length of the last word.
+        """
+        # Step 1: Trim leading and trailing spaces
+        s = s.strip()  # Removes extra spaces around the string
+
+        # Step 2: Split the string by spaces into a list of words
+        words = s.split()  # Splits based on whitespace
+
+        # Step 3: Return the length of the last word
+        return len(words[-1])
+
+# Example usage:
+sol = Solution()
+print(sol.lengthOfLastWord("Hello World"))       # Output: 5
+print(sol.lengthOfLastWord("   fly me   to   the moon  "))  # Output: 4
+print(sol.lengthOfLastWord("luffy is still joyboy"))  # Output: 6
