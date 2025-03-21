@@ -1,0 +1,29 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        """
+        Finds the number of ways to climb a staircase using Dynamic Programming.
+
+        Args:
+        n (int): The number of stairs.
+
+        Returns:
+        int: The number of distinct ways to reach the top.
+        """
+        if n == 1:
+            return 1  # Only one way to climb 1 step
+
+        # Initialize a DP array
+        dp = [0] * (n + 1)
+        dp[1], dp[2] = 1, 2  # Base cases
+
+        # Compute number of ways for each step
+        for i in range(3, n + 1):
+            dp[i] = dp[i - 1] + dp[i - 2]  # Fibonacci pattern
+
+        return dp[n]
+
+# Example usage:
+sol = Solution()
+print(sol.climbStairs(2))  # Output: 2
+print(sol.climbStairs(3))  # Output: 3
+print(sol.climbStairs(5))  # Output: 8
